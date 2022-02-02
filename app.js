@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var flash = require('connect-flash');
 var csrf = require('csurf');
 var passport = require('passport');
 var logger = require('morgan');
@@ -33,15 +34,9 @@ app.use(session({
   saveUninitialized: false, // don't create session until something stored
   store: new SQLiteStore({ db: 'sessions.db', dir: 'var/db' })
 }));
+app.use(flash());
 app.use(csrf());
 app.use(passport.authenticate('session'));
-app.use(function(req, res, next) {
-  var msgs = req.session.messages || [];
-  res.locals.messages = msgs;
-  res.locals.hasMessages = !! msgs.length;
-  req.session.messages = [];
-  next();
-});
 app.use(function(req, res, next) {
   res.locals.csrfToken = req.csrfToken();
   next();

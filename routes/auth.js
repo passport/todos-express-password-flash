@@ -70,6 +70,7 @@ var router = express.Router();
  * sent to the `POST /login/password` route.
  */
 router.get('/login', function(req, res, next) {
+  res.locals.message = req.flash('error');
   res.render('login');
 });
 
@@ -92,7 +93,7 @@ router.get('/login', function(req, res, next) {
 router.post('/login/password', passport.authenticate('local', {
   successReturnToOrRedirect: '/',
   failureRedirect: '/login',
-  failureMessage: true
+  failureFlash: true
 }));
 
 /* POST /logout
