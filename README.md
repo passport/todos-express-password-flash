@@ -46,6 +46,10 @@ server and the browser with a cookie.  As authenticated users interact with the
 app, creating and editing todo items, the login state is restored by
 authenticating the session.
 
+When sign in fails, an informative message is displayed to users using the
+`failureFlash` option, in conjuction with [`connect-flash`](https://github.com/jaredhanson/connect-flash)
+middleware.
+
 ## License
 
 [The Unlicense](https://opensource.org/licenses/unlicense)
