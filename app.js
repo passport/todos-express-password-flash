@@ -32,7 +32,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false, // don't save session if unmodified
   saveUninitialized: false, // don't create session until something stored
-  store: new SQLiteStore({ db: 'sessions.db', dir: 'var/db' })
+  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
 }));
 app.use(flash());
 app.use(csrf());
